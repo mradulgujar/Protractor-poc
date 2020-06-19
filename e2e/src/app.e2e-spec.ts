@@ -10,7 +10,17 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to POCe2e4!');
+    expect(page.title.getText()).toEqual('Automation Demo Site');
+  });
+
+  it('Verify the name entered in single frame', () => {
+    expect(page.getSingleFrameInputText()).toEqual('Mradul');
+  });
+
+  it('Verify the name entered in iframe inside iframe', async () => {
+    await browser.switchTo().defaultContent(); // move out of previous iframe
+    await page.iframeInIframe.click();
+    expect(page.getIframeInFrameInputText()).toEqual('Mradul');
   });
 
   afterEach(async () => {
